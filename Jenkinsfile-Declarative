@@ -27,7 +27,9 @@ pipeline {
                 sh 'docker run -d -p 5000:5000 --name flask-app flask-app:latest'
                 sh 'echo "Check App at http://ip-address:5000/"'
                 //print IP address
-                println dnsInetAddress.hostAddress
+                println InetAddress.localHost.hostAddress
+                println InetAddress.localHost.canonicalHostName
+                
 
               }
         }    
