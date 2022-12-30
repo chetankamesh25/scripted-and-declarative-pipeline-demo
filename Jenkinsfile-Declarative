@@ -25,11 +25,10 @@ pipeline {
                 sh 'echo "Deploying into Server"'
                 sh 'docker rm -f flask-app || true'
                 sh 'docker run -d -p 5000:5000 --name flask-app flask-app:latest'
-                sh 'echo "Check App at http://ip-address:5000/"'
                 
                 //print IP address
                      sh '''
-                            echo http://$(curl -s icanhazip.com):5000
+                            echo App deployed at -- http://$(curl -s icanhazip.com):5000
                         '''
                 
 
