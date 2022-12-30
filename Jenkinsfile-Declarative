@@ -27,8 +27,9 @@ pipeline {
                 sh 'docker run -d -p 5000:5000 --name flask-app flask-app:latest'
                 sh 'echo "Check App at http://ip-address:5000/"'
                 //print IP address
-                def host= sh(returnStdout: true, script: 'echo ${BUILD_URL/https:\\/\\/} | cut -d "/" -f1').trim()
-                println("Hostname : ${host}")
+def getJenkinsMaster() {
+    return env.BUILD_URL.split('/')[2].split(':')[0]
+}
                 
 
               }
