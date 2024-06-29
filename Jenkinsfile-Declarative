@@ -1,18 +1,17 @@
 pipeline {
-        agent any
-        stages {
-            stage('Stage one') {
-                steps {
-                    script {
-                        echo "Welcome to MRV Technology"
-                    }
+    agent any
+    stages {
+        stage('Stage one') {
+            steps {
+                script {
+                    echo "Welcome to MRV Technology"
                 }
             }
-            stage('Stage two') {
-                steps {
-                    script {
-                        echo "Good Morning"
-                    }
+        }
+        stage('Stage two') {
+            steps {
+                script {
+                    echo "Good Morning"
                 }
             }
         }
