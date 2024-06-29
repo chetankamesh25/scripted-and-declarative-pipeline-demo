@@ -1,39 +1,23 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                sh 'docker build -t flask-app:latest .'
-            }
+        agent any
+        parameters {
+            string(name: 'myInput', description: 'Some pipeline parameters')
         }
-        
-        
-        stage('Test') {
-            steps {
-                sh 'python3 test.py'
-            }
-            post {
-                always {junit 'test-reports/*.xml'}
-            }
-        }
-        
-        stage('Approve Deployment') {
-            input{
-                 message "Do you want to proceed for deployment?"
+        stages {
+            stage('Stage one') {
+                steps {
+                    script {
+                        echo "Parameter from template creation: " + templateParams.someParam
                     }
-            steps {
-                sh 'echo "Deploying into Server"'
-                sh 'docker rm -f flask-app || true'
-                sh 'docker run -d -p 5000:5000 --name flask-app flask-app:latest'
-                
-                //print IP address
-                     sh '''
-                            echo App deployed at -- http://$(curl -s icanhazip.com):5000
-                        '''
-                
-
-              }
-        }    
-        
-    }     
+                }
+            }
+            stage('Stage two') {
+                steps {
+                    script {
+                        echo "Job input parameter: " + params.myInput
+                    }
+                }
+            }
+        }
+    }
 }
